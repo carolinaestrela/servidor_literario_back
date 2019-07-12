@@ -41,9 +41,9 @@ const update = (id, comida) => {
  */
 
 const busca = async (textoPesquisa) => {
-    const livros = await livrosModel.find ({ nome: new RegExp(textoPesquisa,'i')})
-    return livros
-    
+    const livros = await livrosModel.find 
+    const filmes = await filmesModel.find 
+    return livros.nome && filmes.nome 
 }
 
 module.exports = {

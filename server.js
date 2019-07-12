@@ -14,18 +14,7 @@ servidor.get('/filmes', (request, response) => {
             console.error(error)
             response.sendStatus(500)
         })
-})
-
-/*
- - buscar por livros cujo nome contém com o texto pesquisado
- -- exemplo: 
- --- texto: "titanic"
- --- na collection livros: "titanic 1", "titanic 2"
- - com os livros em mãos, usar os _id para buscar por filmes com livro_id = _id
- - retornar os filmes obtidos
- */
-
- 
+}) 
 
 servidor.get('/filmes/:id', (request, response) => {
     const id = request.params.id
@@ -95,7 +84,7 @@ servidor.delete('/filmes/:id', (request, response) => {
         })
 })
 
-servidor.get ('/filmes/busca-por-livro/livro', (request, response) => {
+servidor.get ('/filmes/busca-por-livro/:livro', (request, response) => {
     console.log (request.query.pesquisa)
     controller.busca(request.query.pesquisa)
     .then(livros => {
