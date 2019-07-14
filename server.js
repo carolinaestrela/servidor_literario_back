@@ -14,7 +14,7 @@ servidor.get('/filmes', (request, response) => {
             console.error(error)
             response.sendStatus(500)
         })
-}) 
+})
 
 servidor.get('/filmes/:id', (request, response) => {
     const id = request.params.id
@@ -84,23 +84,22 @@ servidor.delete('/filmes/:id', (request, response) => {
         })
 })
 
-servidor.get ('/filmes/busca-por-livro/:livro', (request, response) => {
-    console.log (request.query.pesquisa)
-    controller.busca(request.query.pesquisa)
-    .then(livros => {
-        if (livros === null || livros === undefined) {
-            response.sendStatus(404)
-        } else {
-            response.send (livros)
-        }
-    })
-    .catch(error => {
-        if (error.name === "CastError") {
-            response.sendStatus(400)
-        } else {
-            response.sendStatus(500)
-        } 
-    })
+servidor.get('/filmes/busca-por-livro/:livro', (request, response) => {
+    controller.busca(request.params.livro)
+        .then(livros => {
+            if (!livros) {
+                response.sendStatus(404);
+            } else {
+                response.send(livros);
+            }
+        })
+        .catch(error => {
+            if (error.name === "CastError") {
+                response.sendStatus(400);
+            } else {
+                response.sendStatus(500);
+            }
+        });
 })
 
 servidor.listen(3000)

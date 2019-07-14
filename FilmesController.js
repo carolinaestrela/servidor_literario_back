@@ -31,19 +31,15 @@ const update = (id, comida) => {
     )
 }
 
-/*
- - buscar por livros cujo nome contém com o texto pesquisado
- -- exemplo: 
- --- texto: "titanic"
- --- na collection livros: "titanic 1", "titanic 2"
- - com os livros em mãos, usar os _id para buscar por filmes com livro_id = _id
- - retornar os filmes obtidos
- */
-
 const busca = async (textoPesquisa) => {
-    const livros = await livrosModel.find 
-    const filmes = await filmesModel.find 
-    return livros.nome && filmes.nome 
+    const livros = await livrosModel.find({ nome: new RegExp(textoPesquisa, 'i') });
+    const filmes = [];
+    for (const livro of livros) {
+        const id = livro._id;
+        const resultado = await filmesModel.find({ livro_id: id });
+        filmes.push(...resultado);
+    }
+    return filmes;
 }
 
 module.exports = {

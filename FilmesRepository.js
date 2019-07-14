@@ -1,16 +1,15 @@
-const mongoose = require ("mongoose");
+const mongoose = require("mongoose");
 
-const MONGO_URL =  "mongodb://localhost:27017/literario";
-
-function connect (){
-    mongoose.connect(MONGO_URL,
-        {useNewUrlParser: true},
-        function (error){
-            if(error){
+function connect() {
+    mongoose.connect(process.env.MONGODB_URI,
+        { useNewUrlParser: true },
+        function (error) {
+            if (error) {
                 console.error("Deu erro: ", error)
-            }else{
+            } else {
                 console.log("Conectamos no mongodb!")
             }
-        })
+        });
 }
-module.exports = {connect}
+
+module.exports = { connect };
