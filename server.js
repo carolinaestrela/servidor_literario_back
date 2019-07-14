@@ -102,5 +102,5 @@ servidor.get('/filmes/busca-por-livro/:livro', (request, response) => {
         });
 })
 
-servidor.listen(3000)
-console.log('servidor_literario rodando na porta 3000')
+servidor.listen(process.env.PORT);
+console.log(`servidor_literario rodando na porta ${process.env.PORT}`);
